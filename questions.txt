@@ -1,0 +1,13 @@
+ 1) Или вернуть обект с полем true/false
+
+  @PostMapping(value = "/validate")
+    public ResponseEntity validateResponse(@RequestBody SentenceRequest sentenceRequest) {
+
+        String wordBySentence = taskService.findWordById((sentenceRequest.getSentenceId()));
+        if (wordBySentence.equals(sentenceRequest.getWord())) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
+ 2) createOrUpdate не работал

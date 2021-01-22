@@ -4,8 +4,10 @@ import com.example.english.model.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public interface TaskService extends GenericService<Task,Integer> {
-    List<Task> findByCatalogHeading(String heading);
 
+@Service
+public interface TaskService {
+    List<Task> findByCatalogHeading(String heading);
+    String findWordById(int sentenceId);
+    void save(Task task);
 }

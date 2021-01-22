@@ -21,9 +21,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public void createOrUpdate(Task entity) {
-        taskRepository.createOrUpdate(entity);
+    public void save(Task entity) {
+        taskRepository.save(entity);
     }
 
+
+    @Override
+    public String findWordById(int sentenceId) {
+        return taskRepository.findWordById(sentenceId);
+    }
 }
 

@@ -1,6 +1,7 @@
 package com.example.english.controllers;
 
-import com.example.english.dto.TaskRequest;
+import com.example.english.dto.SentenceRequest;
+import com.example.english.dto.ValidationResult;
 import com.example.english.model.Task;
 import com.example.english.services.TaskService;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,8 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/{catalogHeading}")
+    //http://localhost:9090/english/How to manage your time more effectively (according to machines)
+    @GetMapping("/{heading}")
     public ResponseEntity<List<Task>> findByHeading(@PathVariable("heading") String heading) {
         List<Task> tasks = taskService.findByCatalogHeading(heading);
         if (tasks != null) {
@@ -30,11 +32,16 @@ public class TaskController {
         }
     }
 
-    @PostMapping
-    public void createFromPost(@RequestBody TaskRequest taskRequest) {
-        Task taskEntity = taskRequest.convert();
-        taskService.createOrUpdate(taskEntity);
+    @PostMapping(value = "/validate")
+    public ValidationResult validateResponse(@RequestBody SentenceRequest sentenceRequest) {
+
+        String wordBySentence = taskService.findWordById((sentenceRequest.getSentenceId()));
+        if (wordBySentence.equals(sentenceRequest.getWord())) {
+            return new ValidationResult(true);
+        }
+        return new ValidationResult(false);
     }
 }
+
 
 

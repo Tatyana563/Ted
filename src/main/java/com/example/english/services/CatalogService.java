@@ -3,5 +3,6 @@ package com.example.english.services;
 import com.example.english.model.Catalog;
 
 public interface CatalogService {
-   Catalog findByHeading(String heading);
+    void save(Catalog catalog);
+    Catalog findByHeading(String heading);
 }

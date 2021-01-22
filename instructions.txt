@@ -1,0 +1,126 @@
+1.Create a catalog:
+
+http://localhost:9090/english/catalog
+{
+        "id":1,
+       "heading":"How to manage your time more effectively (according to machines)"
+       }
+2. Add a task to the catalog:
+
+http://localhost:9090/english
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "Every operating system has something called the  that tells the CPU how long to work on each task before switching and what to switch to",
+"word": "scheduler"
+
+--------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "Done right, computers move so fluidly between their various responsibilities, they give the illusion of doing everything |+|.",
+"word": "simultaneously"
+}
+--------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "One of the first |+|is that all the time you spend prioritizing your work is time you aren't spending doing it.",
+"word": "insights"
+}
+-----------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "The programmers of the operating system Linux |+| a similar problem in 2003.",
+"word": "encountered"
+}
+---------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "The programmers’ |+| solution was to replace this full ranking with a limited number of priority “buckets.",
+"word": "counterintuitive"
+}
+-------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "The system was less precise about what to do next but more than |+| it by spending more time making progress.",
+"word": "made up for"
+}
+----------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "So with your emails, insisting on always doing the very most important thing first could lead to a |+|.",
+"word": "meltdown"
+}
+---------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "Another insight that emerges from computer scheduling has to do with one of the most |+| features of modern life: interruptions.",
+"word": "prevalent"
+}
+--------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "The insight here is that there’s a fundamental |+| between productivity and responsiveness.",
+"word": "tradeoff"
+}
+--------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "These two principles are fundamentally in |+|.",
+"word": "tension"
+}
+------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "Recognizing this tension allows us to decide where we want to |+| that balance.",
+"word": "strike"
+}
+-------------------------------------
+{"catalog": {
+   "id":1,
+   "heading":"How to manage your time more effectively (according to machines"
+        },
+"id":1,
+"sentence": "In 2013, interrupt |+| triggered a massive improvement in laptop battery life.",
+"word": "coalescing"
+}
+-----------------------------------
+3. Validate answer:
+http://localhost:9090/english/validate
+{"sentenceId":2,
+"word":"scheduler"
+}
+
+4. Get a task:
+http://localhost:9090/english/How to manage your time more effectively (according to machines);

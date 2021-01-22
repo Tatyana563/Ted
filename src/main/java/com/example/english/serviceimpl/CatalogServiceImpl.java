@@ -10,8 +10,14 @@ import org.springframework.stereotype.Service;
 public class CatalogServiceImpl implements CatalogService {
     @Autowired
     private CatalogRepository catalogRepository;
+
     @Override
     public Catalog findByHeading(String heading) {
-       return catalogRepository.findByHeading(heading);
+        return catalogRepository.findByHeading(heading);
+    }
+
+    @Override
+    public void save(Catalog catalog) {
+        catalogRepository.save(catalog);
     }
 }

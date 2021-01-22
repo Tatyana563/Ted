@@ -1,0 +1,31 @@
+Every operating system has something called the scheduler that tells the CPU how long to
+work on each task before switching, and what to switch to.
+
+Done right, computers move so fluidly between their various responsibilities, they give the
+illusion of doing everything simultaneously.
+
+One of the first insights is that all the time you spend prioritizing your work is time you aren't
+spending doing it.
+
+The programmers of the operating system Linux encountered a similar problem in 2003.
+
+The programmers’ counterintuitive solution was to replace this full ranking with a limited
+number of priority “buckets.”
+
+The system was less precise about what to do next but more than made up for it by spending
+more time making progress.
+
+So with your emails, insisting on always doing the very most important thing first could lead to a
+meltdown.
+
+Another insight that emerges from computer scheduling has to do with one of the most
+prevalent features of modern life: interruptions.
+
+The insight here is that there’s a fundamental tradeoff between productivity and
+responsiveness.
+
+These two principles are fundamentally in tension.
+
+Recognizing this tension allows us to decide where we want to strike that balance.
+
+In 2013, interrupt coalescing triggered a massive improvement in laptop battery life.
