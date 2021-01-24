@@ -2,6 +2,7 @@ package com.example.english.controllers;
 
 import com.example.english.dto.SentenceRequest;
 import com.example.english.dto.ValidationResult;
+import com.example.english.model.Catalog;
 import com.example.english.model.Task;
 import com.example.english.services.TaskService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,8 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    //http://localhost:9090/english/How to manage your time more effectively (according to machines)
+    //http://192.168.0.1:9090/english/How to manage your time more effectively (according to machines)
+    //TODO: implement another endpoint with ID param instead of heading.
     @GetMapping("/{heading}")
     public ResponseEntity<List<Task>> findByHeading(@PathVariable("heading") String heading) {
         List<Task> tasks = taskService.findByCatalogHeading(heading);
@@ -41,6 +43,14 @@ public class TaskController {
         }
         return new ValidationResult(false);
     }
+    @PostMapping
+    public void createFromPost(@RequestBody Task task) {
+        taskService.save(task);
+    }
+
+    //TODO: implement endpoint for listing all tasks (+ with statistics)
+    // use custom dto / map tuples
+    // google query: 'hql map to custom dto'
 }
 
 

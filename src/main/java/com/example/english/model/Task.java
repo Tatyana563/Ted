@@ -27,6 +27,8 @@ public class Task implements Serializable {
     @Column(name = "word")
     private String word;
 
+    private int index;
+
     @ManyToOne
     @JoinColumn(name = "fk_catalog_id", nullable = false)
     private Catalog catalog;

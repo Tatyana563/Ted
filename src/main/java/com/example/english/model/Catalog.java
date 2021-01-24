@@ -19,4 +19,6 @@ public class Catalog {
 
     @Column(name = "heading")
     private String heading;
+
+    //TODO: add relation to tasks (define relation owner)
 }

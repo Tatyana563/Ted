@@ -21,7 +21,7 @@ http://localhost:9090/english
    "id":1,
    "heading":"How to manage your time more effectively (according to machines"
         },
-"id":1,
+
 "sentence": "Done right, computers move so fluidly between their various responsibilities, they give the illusion of doing everything |+|.",
 "word": "simultaneously"
 }
@@ -30,7 +30,7 @@ http://localhost:9090/english
    "id":1,
    "heading":"How to manage your time more effectively (according to machines"
         },
-"id":1,
+
 "sentence": "One of the first |+|is that all the time you spend prioritizing your work is time you aren't spending doing it.",
 "word": "insights"
 }
@@ -39,7 +39,7 @@ http://localhost:9090/english
    "id":1,
    "heading":"How to manage your time more effectively (according to machines"
         },
-"id":1,
+
 "sentence": "The programmers of the operating system Linux |+| a similar problem in 2003.",
 "word": "encountered"
 }
@@ -48,7 +48,7 @@ http://localhost:9090/english
    "id":1,
    "heading":"How to manage your time more effectively (according to machines"
         },
-"id":1,
+
 "sentence": "The programmers’ |+| solution was to replace this full ranking with a limited number of priority “buckets.",
 "word": "counterintuitive"
 }
@@ -57,7 +57,7 @@ http://localhost:9090/english
    "id":1,
    "heading":"How to manage your time more effectively (according to machines"
         },
-"id":1,
+
 "sentence": "The system was less precise about what to do next but more than |+| it by spending more time making progress.",
 "word": "made up for"
 }
@@ -66,7 +66,7 @@ http://localhost:9090/english
    "id":1,
    "heading":"How to manage your time more effectively (according to machines"
         },
-"id":1,
+
 "sentence": "So with your emails, insisting on always doing the very most important thing first could lead to a |+|.",
 "word": "meltdown"
 }
