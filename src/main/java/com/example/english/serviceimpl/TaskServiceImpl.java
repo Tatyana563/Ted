@@ -15,7 +15,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
 
     @Override
-    public List<Task> findByCatalogHeading(String heading) {
+    public List<Task> findByCatalogHeading(Integer heading) {
         return taskRepository.findByCatalogHeading(heading);
     }
 

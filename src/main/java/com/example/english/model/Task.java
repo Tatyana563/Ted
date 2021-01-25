@@ -27,6 +27,7 @@ public class Task implements Serializable {
     @Column(name = "word")
     private String word;
 
+    @Column(name = "index", unique = true)
     private int index;
 
     @ManyToOne

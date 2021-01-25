@@ -7,10 +7,11 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CatalogDto {
    private int id;
    private String heading;
-   private int tasksCount;
+   private long tasksCount;
+
 }

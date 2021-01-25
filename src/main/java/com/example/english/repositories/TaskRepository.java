@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
-    @Query("from Task as t INNER JOIN t.catalog c where c.heading=:heading")
-    List<Task> findByCatalogHeading(@Param("heading") String heading);
+    @Query("from Task as t INNER JOIN t.catalog c where c.id=:id")
+    List<Task> findByCatalogHeading(@Param("id") Integer heading);
 
     @Query("select t.word from  Task as t where t.id=:sentenceId")
     String findWordById(int sentenceId);

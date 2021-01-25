@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface TaskService {
-    List<Task> findByCatalogHeading(String heading);
+    List<Task> findByCatalogHeading(Integer heading);
     String findWordById(int sentenceId);
     void save(Task task);
 }

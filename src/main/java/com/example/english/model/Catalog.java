@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
+
 @EqualsAndHashCode
 @Setter
 @Getter
@@ -21,4 +23,6 @@ public class Catalog {
     private String heading;
 
     //TODO: add relation to tasks (define relation owner)
+    @OneToMany()
+    private Set<Task> tasks;
 }

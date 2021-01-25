@@ -11,3 +11,25 @@
     }
 
  2) createOrUpdate не работал
+ 3)  Nothing from catalog side, @ManyToOne
+        @JoinColumn(name = "fk_catalog_id", nullable = false)
+        private Catalog catalog;
+
+        {
+                "id":1,
+               "heading":"How to manage your time more effectively (according to machines)"
+               }
+
+               nothing in table catalog, one line in task with 0;
+               Solution: add by hand catalog, then task :
+               {"catalog": {
+                  "id":1,
+                  "heading":"How to manage your time more effectively (according to machines"
+                       },
+               "index":1,
+               "sentence": "Every operating system has something called the  that tells the CPU how long to work on each task before switching and what to switch to",
+               "word": "scheduler",
+               "fk_catalog_id":1
+               }
+               **********************
+               if entity has   @JoinColumn in cant be saved first?
