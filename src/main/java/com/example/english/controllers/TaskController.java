@@ -46,10 +46,10 @@ public class TaskController {
     // use custom dto / map tuples
     // google query: 'hql map to custom dto'
 
-
+//ResultTransformer
     @GetMapping("/statistic/{heading}")
     public ResponseEntity<List<CatalogDto>> findStatisticByHeading(@PathVariable("heading") Integer id) {
-        List<CatalogDto> catalogStatistic = customService.getCatalogStatistic();
+        List<CatalogDto> catalogStatistic = customService.getCatalogStatistic3();
         if (catalogStatistic != null) {
             for (CatalogDto catalogDto : catalogStatistic) {
                 System.out.println(catalogDto);
