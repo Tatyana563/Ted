@@ -22,14 +22,11 @@ public class MyCustomService {
         return entityManager.createQuery("select new com.example.english.dto.CatalogDto(t.catalog.id, t.catalog.heading, count(t)) " +
                 "from Task t group by t.catalog.id, t.catalog.heading", CatalogDto.class)
                 .getResultList();
-
-        //TODO: implement another version of method, using tuples (Object[])
     }
 
     //A Custom Query Result Class
     public List<CatalogDto> getCatalogStatistic2() {
-        Session session = entityManager.unwrap(Session.class);
-        List<Object[]> list = session.createQuery("select  t.catalog.id, t.catalog.heading, count(t) " +
+        List<Object[]> list = entityManager.createQuery("select  t.catalog.id, t.catalog.heading, count(t) " +
                 "from Task t group by t.catalog.id, t.catalog.heading", Object[].class).getResultList();
         List<CatalogDto> result = new ArrayList<>();
         for (Object[] row : list) {
@@ -65,6 +62,7 @@ public class MyCustomService {
       return resultList;
     }
 
-    //TODO: implement another version of method, using tuples (Object[])
+    //TODO: implement another version of method, using entity manager with alternative mapping tuple->dto
+    // google: entityManager resulttransformer
 }
 

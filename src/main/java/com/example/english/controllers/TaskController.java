@@ -25,7 +25,6 @@ public class TaskController {
     }
 
     //http://192.168.0.1:9090/english/
-    //TODO: implement another endpoint with ID param instead of heading.
 
     @PostMapping(value = "/validate")
     public ValidationResult validateResponse(@RequestBody SentenceRequest sentenceRequest) {
@@ -42,14 +41,14 @@ public class TaskController {
         taskService.save(task);
     }
 
-    //TODO: implement endpoint for listing all tasks (+ with statistics)
-    // use custom dto / map tuples
-    // google query: 'hql map to custom dto'
+    //TODO: implement another endpoint with ID param instead of heading.
+    //TODO: implement endpoint for requesting single catalogDto
 
 //ResultTransformer
-    @GetMapping("/statistic/{heading}")
-    public ResponseEntity<List<CatalogDto>> findStatisticByHeading(@PathVariable("heading") Integer id) {
-        List<CatalogDto> catalogStatistic = customService.getCatalogStatistic3();
+    @GetMapping("/statistic")
+    public List<CatalogDto> findStatisticByHeading() {
+        return customService.getCatalogStatistic3();
+       /* List<CatalogDto> catalogStatistic = customService.getCatalogStatistic3();
         if (catalogStatistic != null) {
             for (CatalogDto catalogDto : catalogStatistic) {
                 System.out.println(catalogDto);
@@ -58,7 +57,7 @@ public class TaskController {
 
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        }*/
     }
 }
 
