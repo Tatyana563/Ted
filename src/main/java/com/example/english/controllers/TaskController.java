@@ -47,16 +47,34 @@ public class TaskController {
         return customService.getCatalogStatistic();
     }
 
-    @GetMapping("/statistic/{id}")
-    public List<CatalogDto> findStatisticOfArticle(@PathVariable("id") int id) {
-        return customService.getTaskCountByCatalogId(id);
-    }
+//    @GetMapping("/statistic/{id}")
+//    public List<CatalogDto> findStatisticOfArticle(@PathVariable("id") int id) {
+//        return customService.getTaskCountByCatalogId(id);
+//    }
 
-    @GetMapping("/tasks/{id}")
-    public List<TaskRequest> findTasksOfArticle(@PathVariable("id") int id) {
+    //TODO: use another task model
+    @GetMapping("/statistic/{id}")
+    public NewCatalogDto findTasksOfArticle(@PathVariable("id") int id) {
         return customService.getTasksByCatalogId(id);
     }
 
+    //TODO: move out inner classes
+    public static class NewCatalogDto {
+        private int id;
+        //TODO: sentences are sorted already
+        private List<SentenceDto> sentences;
+        //TODO: shuffle words
+        private List<String> words;
+    }
+    public static class SentenceDto {
+        private int id;
+        private String text;
+    }
+
+    public static class CheckRequestDto {
+        private int sentenceId;
+        private String word;
+    }
 
 }
 

@@ -68,9 +68,9 @@ public class MyCustomService {
         query.setParameter("catalogId", id);
         return query.getResultList();
     }
-    //TODO: implement another version of method, using entity manager with alternative mapping tuple->dto
-    // google: entityManager resulttransformer
 
+    //TODO: implement complex model with separate sencetnces and words
+    //TODO: order sentences by it's index
     public List<TaskRequest> getTasksByCatalogId(int id) {
         javax.persistence.Query query = entityManager.createQuery("select new com.example.english.dto.TaskRequest (t.catalog.id,t.index,t.sentence,t.word) from Task t  where t.catalog.id=:catalogId ");
         query.setParameter("catalogId", id);
