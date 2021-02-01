@@ -18,6 +18,7 @@ public class CatalogController {
     public void createFromPost(@RequestBody Catalog catalog) {
         catalogService.save(catalog);
     }
+
 }
 
 

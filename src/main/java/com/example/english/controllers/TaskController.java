@@ -2,12 +2,11 @@ package com.example.english.controllers;
 
 import com.example.english.dto.CatalogDto;
 import com.example.english.dto.SentenceRequest;
+import com.example.english.dto.TaskRequest;
 import com.example.english.dto.ValidationResult;
 import com.example.english.model.Task;
 import com.example.english.serviceimpl.MyCustomService;
 import com.example.english.services.TaskService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +23,11 @@ public class TaskController {
         this.customService = customService;
     }
 
-    //http://192.168.0.1:9090/english/
 
     @PostMapping(value = "/validate")
     public ValidationResult validateResponse(@RequestBody SentenceRequest sentenceRequest) {
 
-        String wordBySentence = taskService.findWordById((sentenceRequest.getSentenceId()));
+        String wordBySentence = taskService.findWordByIndex((sentenceRequest.getSentenceIndex()));
         if (wordBySentence.equals(sentenceRequest.getWord())) {
             return new ValidationResult(true);
         }
@@ -44,21 +42,22 @@ public class TaskController {
     //TODO: implement another endpoint with ID param instead of heading.
     //TODO: implement endpoint for requesting single catalogDto
 
-//ResultTransformer
     @GetMapping("/statistic")
-    public List<CatalogDto> findStatisticByHeading() {
-        return customService.getCatalogStatistic3();
-       /* List<CatalogDto> catalogStatistic = customService.getCatalogStatistic3();
-        if (catalogStatistic != null) {
-            for (CatalogDto catalogDto : catalogStatistic) {
-                System.out.println(catalogDto);
-            }
-            return ResponseEntity.ok(catalogStatistic);
-
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }*/
+    public List<CatalogDto> findStatisticAllArticles() {
+        return customService.getCatalogStatistic();
     }
+
+    @GetMapping("/statistic/{id}")
+    public List<CatalogDto> findStatisticOfArticle(@PathVariable("id") int id) {
+        return customService.getTaskCountByCatalogId(id);
+    }
+
+    @GetMapping("/tasks/{id}")
+    public List<TaskRequest> findTasksOfArticle(@PathVariable("id") int id) {
+        return customService.getTasksByCatalogId(id);
+    }
+
+
 }
 
 

@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SentenceRequest {
-    int sentenceId;
+    int sentenceIndex;
     String word;
 }

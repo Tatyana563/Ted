@@ -1,14 +1,14 @@
 package com.example.english.serviceimpl;
 
 import com.example.english.dto.CatalogDto;
-import org.hibernate.Session;
+import com.example.english.dto.TaskRequest;
 import org.hibernate.query.Query;
 import org.hibernate.transform.ResultTransformer;
-import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +42,6 @@ public class MyCustomService {
     }
 
     public List<CatalogDto> getCatalogStatistic3() {
-      //  Session session = entityManager.unwrap(Session.class);
         Query query = entityManager.createQuery("select  t.catalog.id, t.catalog.heading, count(t) " +
                 "from Task t group by t.catalog.id, t.catalog.heading")
                 .unwrap(Query.class).setResultTransformer(new ResultTransformer() {
@@ -59,10 +58,22 @@ public class MyCustomService {
                     }
                 });
         List resultList = query.getResultList();
-      return resultList;
+        return resultList;
     }
 
+    //Using a Constructor in HQL
+    public List<CatalogDto> getTaskCountByCatalogId(int id) {
+        TypedQuery<CatalogDto> query = entityManager.createQuery("select new com.example.english.dto.CatalogDto(t.catalog.id, t.catalog.heading, count(t)) " +
+                "from Task t  where t.catalog.id=:catalogId group by t.catalog.id, t.catalog.heading", CatalogDto.class);
+        query.setParameter("catalogId", id);
+        return query.getResultList();
+    }
     //TODO: implement another version of method, using entity manager with alternative mapping tuple->dto
     // google: entityManager resulttransformer
-}
 
+    public List<TaskRequest> getTasksByCatalogId(int id) {
+        javax.persistence.Query query = entityManager.createQuery("select new com.example.english.dto.TaskRequest (t.catalog.id,t.index,t.sentence,t.word) from Task t  where t.catalog.id=:catalogId ");
+        query.setParameter("catalogId", id);
+        return query.getResultList();
+    }
+}

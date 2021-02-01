@@ -4,5 +4,4 @@ import com.example.english.model.Catalog;
 
 public interface CatalogService {
     void save(Catalog catalog);
-    Catalog findByHeading(String heading);
 }
