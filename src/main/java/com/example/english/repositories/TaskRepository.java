@@ -2,6 +2,7 @@ package com.example.english.repositories;
 
 import com.example.english.dto.SentenceDto;
 import com.example.english.model.Task;
+import org.hibernate.annotations.NamedNativeQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     @Query(" select new com.example.english.dto.SentenceDto (t.id, t.sentence) from Task as t where t.catalog.id=:catalogId order by t.index ASC ")
     List<SentenceDto> findSentenceDtoByCatalogId (int catalogId);
-
 
 
 }

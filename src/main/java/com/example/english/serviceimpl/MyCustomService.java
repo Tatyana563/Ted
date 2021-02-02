@@ -87,4 +87,17 @@ public class MyCustomService {
         System.out.println(catalogDto);
         return catalogDto;
     }
+
+    public NewCatalogDto getTasksByCatalogId_2(int catalogId) {
+        List<String> wordsByCatalogId = taskRepository.findWordsByCatalogId(catalogId);
+        Collections.shuffle(wordsByCatalogId);
+        //  List<SentenceDto> sentenceDtoByCatalogId = taskRepository.findSentenceDtoByCatalogId(catalogId);
+        List<SentenceDto> sentenceDtoByCatalogId = entityManager.createNamedQuery("SentenceDto", SentenceDto.class)
+                .setParameter(1,catalogId)
+                .getResultList();
+
+        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceDtoByCatalogId, wordsByCatalogId);
+        System.out.println(catalogDto);
+        return catalogDto;
+    }
 }

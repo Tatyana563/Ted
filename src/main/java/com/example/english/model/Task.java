@@ -1,14 +1,32 @@
 package com.example.english.model;
 
 
+import com.example.english.dto.SentenceDto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.beans.IntrospectionException;
 import java.io.Serializable;
 
+
+@SqlResultSetMapping(
+        name="SentenceResult",
+        classes={
+                @ConstructorResult(
+                        targetClass= SentenceDto.class,
+                        columns={
+                                @ColumnResult(name="id", type= Integer.class),
+                                @ColumnResult(name="sentence", type=String.class)
+                               })})
+@NamedNativeQuery(
+        name = "SentenceDto",
+        query = " select t.id, t.sentence from Task as t " +
+                "    INNER JOIN catalog on t.fk_catalog_id=catalog.id where t.fk_catalog_id=? order by t.index ASC ",
+        resultSetMapping = "SentenceResult"
+)
 @EqualsAndHashCode
 @Setter
 @Getter
