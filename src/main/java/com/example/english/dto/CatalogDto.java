@@ -10,8 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CatalogDto {
-   private int id;
-   private String heading;
-   private long tasksCount;
+    private int id;
+    private String heading;
+    private long tasksCount;
 
 }

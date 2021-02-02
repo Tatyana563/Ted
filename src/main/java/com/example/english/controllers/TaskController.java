@@ -1,8 +1,7 @@
 package com.example.english.controllers;
 
 import com.example.english.dto.CatalogDto;
-import com.example.english.dto.SentenceRequest;
-import com.example.english.dto.TaskRequest;
+import com.example.english.dto.NewCatalogDto;
 import com.example.english.dto.ValidationResult;
 import com.example.english.model.Task;
 import com.example.english.serviceimpl.MyCustomService;
@@ -25,16 +24,16 @@ public class TaskController {
 
 
     @PostMapping(value = "/validate")
-    public ValidationResult validateResponse(@RequestBody SentenceRequest sentenceRequest) {
+    public ValidationResult validateResponse(@RequestBody com.example.english.dto.CheckResultDto checkResultDto) {
 
-        String wordBySentence = taskService.findWordByIndex((sentenceRequest.getSentenceIndex()));
-        if (wordBySentence.equals(sentenceRequest.getWord())) {
+        String wordBySentence = taskService.findWordById(checkResultDto.getSentenceId());
+        if (wordBySentence.equals(checkResultDto.getWord())) {
             return new ValidationResult(true);
         }
         return new ValidationResult(false);
     }
 
-    @PostMapping
+    @PostMapping("/task")
     public void createFromPost(@RequestBody Task task) {
         taskService.save(task);
     }
@@ -47,36 +46,20 @@ public class TaskController {
         return customService.getCatalogStatistic();
     }
 
-//    @GetMapping("/statistic/{id}")
-//    public List<CatalogDto> findStatisticOfArticle(@PathVariable("id") int id) {
-//        return customService.getTaskCountByCatalogId(id);
-//    }
 
-    //TODO: use another task model
-    @GetMapping("/statistic/{id}")
+
+    //TODO: use another task model;
+    @GetMapping("/{id}")
     public NewCatalogDto findTasksOfArticle(@PathVariable("id") int id) {
         return customService.getTasksByCatalogId(id);
     }
-
-    //TODO: move out inner classes
-    public static class NewCatalogDto {
-        private int id;
-        //TODO: sentences are sorted already
-        private List<SentenceDto> sentences;
-        //TODO: shuffle words
-        private List<String> words;
-    }
-    public static class SentenceDto {
-        private int id;
-        private String text;
-    }
-
-    public static class CheckRequestDto {
-        private int sentenceId;
-        private String word;
-    }
-
 }
+
+//    //TODO: move out inner classes
+
+//        //TODO: sentences are sorted already
+
+//        //TODO: shuffle words
 
 
 

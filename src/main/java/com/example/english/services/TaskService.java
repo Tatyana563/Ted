@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface TaskService {
-    String findWordByIndex(int sentenceId);
+    String findWordById(int sentenceId);
 
     void save(Task task);
 }

@@ -20,7 +20,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public String findWordByIndex(int sentenceId) {
+    public String findWordById(int sentenceId) {
         return taskRepository.findWordById(sentenceId);
     }
 }

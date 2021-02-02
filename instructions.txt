@@ -7,7 +7,7 @@ http://localhost:9090/english/catalog
 *************************************************************************
 2. Add a task to the catalog:
 
-http://localhost:9090/english
+http://localhost:9090/english/task
  {"catalog":{
 "id":1
  },
@@ -23,5 +23,8 @@ http://localhost:9090/english/validate
 "word":"scheduler"
 }
 
-4. Get a task:
-http://localhost:9090/english/How to manage your time more effectively (according to machines);
+4. Get statistic about all tasks:
+http://localhost:9090/english/statistic
+
+5)Get task for a particular article
+http://localhost:9090/english/2

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SentenceRequest {
-    int sentenceIndex;
-    String word;
+public class SentenceDto {
+    int id;
+    String text;
 }

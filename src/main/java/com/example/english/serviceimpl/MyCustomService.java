@@ -1,21 +1,29 @@
 package com.example.english.serviceimpl;
 
+
 import com.example.english.dto.CatalogDto;
-import com.example.english.dto.TaskRequest;
+import com.example.english.dto.NewCatalogDto;
+import com.example.english.dto.SentenceDto;
+import com.example.english.repositories.TaskRepository;
 import org.hibernate.query.Query;
 import org.hibernate.transform.ResultTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class MyCustomService {
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private TaskRepository taskRepository;
 
     //Using a Constructor in HQL
     public List<CatalogDto> getCatalogStatistic() {
@@ -71,9 +79,12 @@ public class MyCustomService {
 
     //TODO: implement complex model with separate sencetnces and words
     //TODO: order sentences by it's index
-    public List<TaskRequest> getTasksByCatalogId(int id) {
-        javax.persistence.Query query = entityManager.createQuery("select new com.example.english.dto.TaskRequest (t.catalog.id,t.index,t.sentence,t.word) from Task t  where t.catalog.id=:catalogId ");
-        query.setParameter("catalogId", id);
-        return query.getResultList();
+    public NewCatalogDto getTasksByCatalogId(int catalogId) {
+        List<String> wordsByCatalogId = taskRepository.findWordsByCatalogId(catalogId);
+        Collections.shuffle(wordsByCatalogId);
+        List<SentenceDto> sentenceDtoByCatalogId = taskRepository.findSentenceDtoByCatalogId(catalogId);
+        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceDtoByCatalogId, wordsByCatalogId);
+        System.out.println(catalogDto);
+        return catalogDto;
     }
 }
