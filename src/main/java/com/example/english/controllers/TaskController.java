@@ -50,8 +50,8 @@ public class TaskController {
 
     //TODO: use another task model;
     @GetMapping("/{id}")
-    public NewCatalogDto findTasksOfArticle(@PathVariable("id") int id) {
-        return customService.getTasksByCatalogId_2(id);
+    public Task findTasksOfArticle(@PathVariable("id") int id) {
+        return customService.getTasksByCatalogId_3(id);
     }
 }
 

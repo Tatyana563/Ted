@@ -4,18 +4,18 @@ package com.example.english.serviceimpl;
 import com.example.english.dto.CatalogDto;
 import com.example.english.dto.NewCatalogDto;
 import com.example.english.dto.SentenceDto;
+import com.example.english.model.Task;
 import com.example.english.repositories.TaskRepository;
 import org.hibernate.query.Query;
 import org.hibernate.transform.ResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MyCustomService {
@@ -99,5 +99,18 @@ public class MyCustomService {
         NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceDtoByCatalogId, wordsByCatalogId);
         System.out.println(catalogDto);
         return catalogDto;
+    }
+
+
+    public Task getTasksByCatalogId_3 (int catalogId) {
+
+
+        EntityGraph entityGraph = entityManager.getEntityGraph("new-catalog-dto-graph");
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("javax.persistence.fetchgraph", entityGraph);
+        Task task = entityManager.find(Task.class, catalogId, properties);
+
+        entityManager.close();
+        return task;
     }
 }

@@ -27,6 +27,18 @@ import java.io.Serializable;
                 "    INNER JOIN catalog on t.fk_catalog_id=catalog.id where t.fk_catalog_id=? order by t.index ASC ",
         resultSetMapping = "SentenceResult"
 )
+
+
+@NamedEntityGraph(
+        name = "new-catalog-dto-graph",
+        attributeNodes = {
+                @NamedAttributeNode("sentence"),
+                @NamedAttributeNode("word"),
+              //  @NamedAttributeNode("catalog"),
+        }
+)
+
+
 @EqualsAndHashCode
 @Setter
 @Getter
@@ -49,7 +61,7 @@ public class Task implements Serializable {
     @Column(name = "index")
     private int index;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_catalog_id", nullable = false)
     private Catalog catalog;
 }

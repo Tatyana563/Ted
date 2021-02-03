@@ -22,6 +22,6 @@ public class Catalog {
     @Column(name = "heading")
     private String heading;
 
-    @OneToMany(mappedBy = "catalog")
-    private Set<Task> tasks;
+//    @OneToMany(mappedBy = "catalog")
+//    private Set<Task> tasks;
 }
