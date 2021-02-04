@@ -3,6 +3,7 @@ package com.example.english.controllers;
 import com.example.english.dto.CatalogDto;
 import com.example.english.dto.NewCatalogDto;
 import com.example.english.dto.ValidationResult;
+import com.example.english.model.Catalog;
 import com.example.english.model.Task;
 import com.example.english.serviceimpl.MyCustomService;
 import com.example.english.services.TaskService;
@@ -41,16 +42,16 @@ public class TaskController {
     //TODO: implement another endpoint with ID param instead of heading.
     //TODO: implement endpoint for requesting single catalogDto
 
-    @GetMapping("/statistic")
-    public List<CatalogDto> findStatisticAllArticles() {
-        return customService.getCatalogStatistic();
-    }
+//    @GetMapping("/statistic")
+//    public List<CatalogDto> findStatisticAllArticles() {
+//        return customService.getCatalogStatistic();
+//    }
 
 
 
     //TODO: use another task model;
     @GetMapping("/{id}")
-    public Task findTasksOfArticle(@PathVariable("id") int id) {
+    public Catalog findTasksOfArticle(@PathVariable("id") int id) {
         return customService.getTasksByCatalogId_3(id);
     }
 }

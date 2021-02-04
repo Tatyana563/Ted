@@ -7,6 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
+@NamedEntityGraph(
+        name = "new-catalog-dto-graph",
+        attributeNodes = {
+                @NamedAttributeNode("id"),
+                @NamedAttributeNode("tasks"),
+                //  @NamedAttributeNode("catalog"),
+        }
+)
 
 @EqualsAndHashCode
 @Setter
@@ -24,4 +32,8 @@ public class Catalog {
 
 //    @OneToMany(mappedBy = "catalog")
 //    private Set<Task> tasks;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_catalog_id", nullable = false)
+    private Set<Task> tasks;
 }

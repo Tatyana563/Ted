@@ -29,14 +29,14 @@ import java.io.Serializable;
 )
 
 
-@NamedEntityGraph(
-        name = "new-catalog-dto-graph",
-        attributeNodes = {
-                @NamedAttributeNode("sentence"),
-                @NamedAttributeNode("word"),
-              //  @NamedAttributeNode("catalog"),
-        }
-)
+//@NamedEntityGraph(
+//        name = "new-catalog-dto-graph",
+//        attributeNodes = {
+//                @NamedAttributeNode("sentence"),
+//                @NamedAttributeNode("word"),
+//              //  @NamedAttributeNode("catalog"),
+//        }
+//)
 
 
 @EqualsAndHashCode
@@ -61,7 +61,7 @@ public class Task implements Serializable {
     @Column(name = "index")
     private int index;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_catalog_id", nullable = false)
-    private Catalog catalog;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "fk_catalog_id", nullable = false)
+//    private Catalog catalog;
 }
