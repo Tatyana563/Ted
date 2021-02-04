@@ -1,21 +1,15 @@
 package com.example.english.serviceimpl;
 
 
-import com.example.english.dto.CatalogDto;
 import com.example.english.dto.NewCatalogDto;
 import com.example.english.dto.SentenceDto;
 import com.example.english.model.Catalog;
 import com.example.english.model.Task;
-import com.example.english.repositories.TaskRepository;
-import org.hibernate.query.Query;
-import org.hibernate.transform.ResultTransformer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Service
@@ -103,15 +97,32 @@ public class MyCustomService {
 //    }
 
 
-    public Catalog getTasksByCatalogId_3 (int catalogId) {
+    public NewCatalogDto getTasksByCatalogId_3(int catalogId) {
 
 
         EntityGraph entityGraph = entityManager.getEntityGraph("new-catalog-dto-graph");
         Map<String, Object> properties = new HashMap<>();
         properties.put("javax.persistence.fetchgraph", entityGraph);
         Catalog catalog = entityManager.find(Catalog.class, catalogId, properties);
-
+        Set<Task> tasks = catalog.getTasks();
+        List<String> words = new ArrayList<>();
+        List<SentenceDto> sentenceList = new ArrayList<>();
+        for (Task task : tasks) {
+            String word = task.getWord();
+            words.add(word);
+            SentenceDto sentenceDto = new SentenceDto(task.getId(), task.getSentence());
+            sentenceList.add(sentenceDto);
+        }
+        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceList, words);
         entityManager.close();
-        return catalog;
+        System.out.println(catalogDto);
+        return catalogDto;
     }
 }
+//public class NewCatalogDto {
+//    private int catalogId;
+//    //TODO: sentences are sorted already
+//    private List<SentenceDto> sentences;
+//    //TODO: shuffle words
+//    private List<String> words;
+//}

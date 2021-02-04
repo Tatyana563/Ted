@@ -24,20 +24,20 @@ public class TaskController {
     }
 
 
-    @PostMapping(value = "/validate")
-    public ValidationResult validateResponse(@RequestBody com.example.english.dto.CheckResultDto checkResultDto) {
-
-        String wordBySentence = taskService.findWordById(checkResultDto.getSentenceId());
-        if (wordBySentence.equals(checkResultDto.getWord())) {
-            return new ValidationResult(true);
-        }
-        return new ValidationResult(false);
-    }
-
-    @PostMapping("/task")
-    public void createFromPost(@RequestBody Task task) {
-        taskService.save(task);
-    }
+//    @PostMapping(value = "/validate")
+//    public ValidationResult validateResponse(@RequestBody com.example.english.dto.CheckResultDto checkResultDto) {
+//
+//        String wordBySentence = taskService.findWordById(checkResultDto.getSentenceId());
+//        if (wordBySentence.equals(checkResultDto.getWord())) {
+//            return new ValidationResult(true);
+//        }
+//        return new ValidationResult(false);
+//    }
+//
+//    @PostMapping("/task")
+//    public void createFromPost(@RequestBody Task task) {
+//        taskService.save(task);
+//    }
 
     //TODO: implement another endpoint with ID param instead of heading.
     //TODO: implement endpoint for requesting single catalogDto
@@ -51,7 +51,7 @@ public class TaskController {
 
     //TODO: use another task model;
     @GetMapping("/{id}")
-    public Catalog findTasksOfArticle(@PathVariable("id") int id) {
+    public NewCatalogDto findTasksOfArticle(@PathVariable("id") int id) {
         return customService.getTasksByCatalogId_3(id);
     }
 }

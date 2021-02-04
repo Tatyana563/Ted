@@ -2,10 +2,7 @@ package com.example.english.model;
 
 
 import com.example.english.dto.SentenceDto;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.beans.IntrospectionException;
@@ -40,9 +37,10 @@ import java.io.Serializable;
 
 
 @EqualsAndHashCode
-@Setter
-@Getter
+//@Setter
+//@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Task implements Serializable {
 
@@ -61,6 +59,37 @@ public class Task implements Serializable {
     @Column(name = "index")
     private int index;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getSentence() {
+        return sentence;
+    }
+
+    public void setSentence(String sentence) {
+        this.sentence = sentence;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "fk_catalog_id", nullable = false)
 //    private Catalog catalog;

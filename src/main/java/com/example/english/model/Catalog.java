@@ -1,9 +1,6 @@
 package com.example.english.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -17,9 +14,10 @@ import java.util.Set;
 )
 
 @EqualsAndHashCode
-@Setter
-@Getter
+//@Setter
+//@Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Catalog {
     @Id
@@ -36,4 +34,29 @@ public class Catalog {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_catalog_id", nullable = false)
     private Set<Task> tasks;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getHeading() {
+        return heading;
+    }
+
+    public void setHeading(String heading) {
+        this.heading = heading;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
 }
