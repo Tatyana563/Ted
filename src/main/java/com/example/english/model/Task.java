@@ -5,7 +5,6 @@ import com.example.english.dto.SentenceDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.beans.IntrospectionException;
 import java.io.Serializable;
 
 
@@ -25,8 +24,8 @@ import java.io.Serializable;
         resultSetMapping = "SentenceResult"
 )
 @EqualsAndHashCode
-//@Setter
-//@Getter
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -43,50 +42,10 @@ public class Task implements Serializable {
     @Column(name = "word")
     private String word;
 
-    //TODO: index is unique per catalog
     @Column(name = "index")
     private int index;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getSentence() {
-        return sentence;
-    }
-
-    public void setSentence(String sentence) {
-        this.sentence = sentence;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_catalog_id", nullable = false)
     private Catalog catalog;
-
-    public Catalog getCatalog() {
-        return catalog;
-    }
-
-    public void setCatalog(Catalog catalog) {
-        this.catalog = catalog;
-    }
 }

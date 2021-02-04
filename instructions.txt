@@ -28,3 +28,27 @@ http://localhost:9090/english/statistic
 
 5)Get task for a particular article
 http://localhost:9090/english/2
+
+*****************************
+
+http://localhost:9090/english/article
+{
+    "name": "new test article",
+    "sentences" :[
+        {
+            "text": "first sentence",
+            "word": "someword"
+        },
+        {
+            "text": "second sentence",
+            "word": "abc"
+        },
+        {
+            "text": "third sentence",
+            "word": "zxw"
+        }
+    ]
+}
+
+
+TODO:SWAGGER

@@ -14,8 +14,8 @@ import java.util.Set;
 )
 
 @EqualsAndHashCode
-//@Setter
-//@Getter
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -29,30 +29,7 @@ public class Catalog {
     private String heading;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalog")
+    @EqualsAndHashCode.Exclude
+    @OrderBy("index ASC")
     private Set<Task> tasks;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getHeading() {
-        return heading;
-    }
-
-    public void setHeading(String heading) {
-        this.heading = heading;
-    }
-
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
-    }
 }

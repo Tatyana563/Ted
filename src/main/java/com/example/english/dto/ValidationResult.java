@@ -2,7 +2,7 @@ package com.example.english.dto;
 
 import lombok.Value;
 
-//@Value
+@Value
 public class ValidationResult {
    private boolean success;
 
@@ -14,6 +14,4 @@ public class ValidationResult {
         this.success = success;
     }
 
-    public ValidationResult() {
-    }
 }

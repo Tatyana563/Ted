@@ -9,6 +9,7 @@ import lombok.Setter;
 //@Getter
 //@NoArgsConstructor
 //@AllArgsConstructor
+//TODO: use lombok annotations, get rid of getters and setters
 public class CatalogDto {
     private int id;
     private String heading;

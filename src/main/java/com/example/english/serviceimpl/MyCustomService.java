@@ -5,14 +5,15 @@ package com.example.english.serviceimpl;
 import com.example.english.dto.CatalogDto;
 import com.example.english.dto.NewCatalogDto;
 import com.example.english.dto.SentenceDto;
+import com.example.english.mappers.NewCatalogDtoMapper;
 import com.example.english.model.Catalog;
 import com.example.english.model.Task;
 
 
 import com.example.english.repositories.TaskRepository;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.query.Query;
 import org.hibernate.transform.ResultTransformer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityGraph;
@@ -24,12 +25,13 @@ import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class MyCustomService {
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    @Autowired
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
+    private final NewCatalogDtoMapper newCatalogDtoMapper;
 
     //Using a Constructor in HQL
     public List<CatalogDto> getCatalogStatistic() {
@@ -83,8 +85,6 @@ public class MyCustomService {
         return query.getResultList();
     }
 
-    //TODO: implement complex model with separate sencetnces and words
-    //TODO: order sentences by it's index
     public NewCatalogDto getTasksByCatalogId(int catalogId) {
         List<String> wordsByCatalogId = taskRepository.findWordsByCatalogId(catalogId);
         Collections.shuffle(wordsByCatalogId);
@@ -109,31 +109,22 @@ public class MyCustomService {
 
 
     public NewCatalogDto getTasksByCatalogId_3(int catalogId) {
-
-
         EntityGraph entityGraph = entityManager.getEntityGraph("new-catalog-dto-graph");
         Map<String, Object> properties = new HashMap<>();
         properties.put("javax.persistence.fetchgraph", entityGraph);
         Catalog catalog = entityManager.find(Catalog.class, catalogId, properties);
-        Set<Task> tasks = catalog.getTasks();
-        List<String> words = new ArrayList<>();
-        List<SentenceDto> sentenceList = new ArrayList<>();
-        for (Task task : tasks) {
-            String word = task.getWord();
-            words.add(word);
-            SentenceDto sentenceDto = new SentenceDto(task.getId(), task.getSentence());
-            sentenceList.add(sentenceDto);
-        }
-        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceList, words);
-        entityManager.close();
-        System.out.println(catalogDto);
-        return catalogDto;
+//        Set<Task> tasks = catalog.getTasks();
+//        List<String> words = new ArrayList<>();
+//        List<SentenceDto> sentenceList = new ArrayList<>();
+//        for (Task task : tasks) {
+//            String word = task.getWord();
+//            words.add(word);
+//            SentenceDto sentenceDto = new SentenceDto(task.getId(), task.getSentence());
+//            sentenceList.add(sentenceDto);
+//        }
+//        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceList, words);
+//        entityManager.close();
+//        System.out.println(catalogDto);
+        return newCatalogDtoMapper.fromEntity(catalog);
     }
 }
-//public class NewCatalogDto {
-//    private int catalogId;
-//    //TODO: sentences are sorted already
-//    private List<SentenceDto> sentences;
-//    //TODO: shuffle words
-//    private List<String> words;
-//}
