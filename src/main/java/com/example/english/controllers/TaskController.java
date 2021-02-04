@@ -1,9 +1,9 @@
 package com.example.english.controllers;
 
 import com.example.english.dto.CatalogDto;
+import com.example.english.dto.CheckResultDto;
 import com.example.english.dto.NewCatalogDto;
 import com.example.english.dto.ValidationResult;
-import com.example.english.model.Catalog;
 import com.example.english.model.Task;
 import com.example.english.serviceimpl.MyCustomService;
 import com.example.english.services.TaskService;
@@ -24,29 +24,28 @@ public class TaskController {
     }
 
 
-//    @PostMapping(value = "/validate")
-//    public ValidationResult validateResponse(@RequestBody com.example.english.dto.CheckResultDto checkResultDto) {
-//
-//        String wordBySentence = taskService.findWordById(checkResultDto.getSentenceId());
-//        if (wordBySentence.equals(checkResultDto.getWord())) {
-//            return new ValidationResult(true);
-//        }
-//        return new ValidationResult(false);
-//    }
-//
-//    @PostMapping("/task")
-//    public void createFromPost(@RequestBody Task task) {
-//        taskService.save(task);
-//    }
+    @PostMapping(value = "/validate")
+    public ValidationResult validateResponse(@RequestBody CheckResultDto checkResultDto) {
+
+        String wordBySentence = taskService.findWordById(checkResultDto.getSentenceId());
+        if (wordBySentence.equals(checkResultDto.getWord())) {
+            return new ValidationResult(true);
+        }
+        return new ValidationResult(false);
+    }
+
+    @PostMapping("/task")
+    public void createFromPost(@RequestBody Task task) {
+        taskService.save(task);
+    }
 
     //TODO: implement another endpoint with ID param instead of heading.
     //TODO: implement endpoint for requesting single catalogDto
 
-//    @GetMapping("/statistic")
-//    public List<CatalogDto> findStatisticAllArticles() {
-//        return customService.getCatalogStatistic();
-//    }
-
+    @GetMapping("/statistic")
+    public List<CatalogDto> findStatisticAllArticles() {
+        return customService.getCatalogStatistic();
+    }
 
 
     //TODO: use another task model;

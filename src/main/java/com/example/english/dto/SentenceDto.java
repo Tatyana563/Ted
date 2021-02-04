@@ -41,4 +41,7 @@ public class SentenceDto {
                 ", sentence='" + sentence + '\'' +
                 '}';
     }
+
+    public SentenceDto() {
+    }
 }

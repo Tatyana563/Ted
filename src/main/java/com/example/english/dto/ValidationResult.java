@@ -2,7 +2,18 @@ package com.example.english.dto;
 
 import lombok.Value;
 
-@Value
+//@Value
 public class ValidationResult {
-    boolean success;
+   private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public ValidationResult(boolean success) {
+        this.success = success;
+    }
+
+    public ValidationResult() {
+    }
 }

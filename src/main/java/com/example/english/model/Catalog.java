@@ -28,11 +28,7 @@ public class Catalog {
     @Column(name = "heading")
     private String heading;
 
-//    @OneToMany(mappedBy = "catalog")
-//    private Set<Task> tasks;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_catalog_id", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "catalog")
     private Set<Task> tasks;
 
 
