@@ -6,14 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface CreationMapper {
+public interface CatalogMapper {
     //TODO: implement mappers for article creation.
-
-
     @Mapping(target = "heading", source = "name")
     Catalog toCatalogEntity(NewArticleRequest newArticleRequest);
-
-
 }
 
 
