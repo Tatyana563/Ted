@@ -125,6 +125,6 @@ public class MyCustomService {
 //        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceList, words);
 //        entityManager.close();
 //        System.out.println(catalogDto);
-        return newCatalogDtoMapper.fromEntity(catalog);
+        return newCatalogDtoMapper.catalogToCatalogDto(catalog);
     }
 }

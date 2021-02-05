@@ -13,18 +13,16 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface NewCatalogDtoMapper {
-
+    @Mapping(target = "words", expression = "java(tasksToWords(catalog.getTasks()))")
     @Mapping(target = "catalogId", source = "id")
     @Mapping(target = "sentences", source = "tasks")
-    @Mapping(target = "words", expression = "java(wordsFromTasks(catalog.getTasks()))")
-    NewCatalogDto fromEntity(Catalog catalog);
+    NewCatalogDto catalogToCatalogDto(Catalog catalog);
 
-    SentenceDto sentenceFromTask(Task task);
+    SentenceDto taskToSentenceDto(Task task);
 
-    default String wordFromTask(Task task) {
-        return task == null ? null : task.getWord();
+    default String taskToWord(Task task) {
+        return task.getWord();
     }
 
-    //TODO: shuffle words
-    List<String> wordsFromTasks(Set<Task> task);
+    List<String> tasksToWords(Set<Task> tasks);
 }
