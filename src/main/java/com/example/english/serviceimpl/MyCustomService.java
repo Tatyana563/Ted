@@ -113,18 +113,6 @@ public class MyCustomService {
         Map<String, Object> properties = new HashMap<>();
         properties.put("javax.persistence.fetchgraph", entityGraph);
         Catalog catalog = entityManager.find(Catalog.class, catalogId, properties);
-//        Set<Task> tasks = catalog.getTasks();
-//        List<String> words = new ArrayList<>();
-//        List<SentenceDto> sentenceList = new ArrayList<>();
-//        for (Task task : tasks) {
-//            String word = task.getWord();
-//            words.add(word);
-//            SentenceDto sentenceDto = new SentenceDto(task.getId(), task.getSentence());
-//            sentenceList.add(sentenceDto);
-//        }
-//        NewCatalogDto catalogDto = new NewCatalogDto(catalogId, sentenceList, words);
-//        entityManager.close();
-//        System.out.println(catalogDto);
         return newCatalogDtoMapper.catalogToCatalogDto(catalog);
     }
 }

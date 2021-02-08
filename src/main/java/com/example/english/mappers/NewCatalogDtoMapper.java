@@ -23,6 +23,5 @@ public interface NewCatalogDtoMapper {
     default String taskToWord(Task task) {
         return task.getWord();
     }
-
     List<String> tasksToWords(Set<Task> tasks);
 }

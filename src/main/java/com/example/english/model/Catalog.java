@@ -9,7 +9,6 @@ import java.util.Set;
         attributeNodes = {
                 @NamedAttributeNode("id"),
                 @NamedAttributeNode("tasks"),
-                //  @NamedAttributeNode("catalog"),
         }
 )
 
