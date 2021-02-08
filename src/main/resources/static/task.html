@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        .wrapper {
+            user-select: none;
+        }
+        h1 {
+            text-align: center;
+            text-transform: capitalize;
+            font-family: cursive;
+            font-size: 1.3rem;
+        }
+        .drag-and-drop {
+            display: flex;
+            flex-flow: row wrap;
+            font-family: sans-serif;
+        }
+        .draggable-container {
+            width: 20%;
+            background: aliceblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .droppable-container {
+            width: 80%;
+        }
+        /* .droppable-container > p {
+           text-indent: 20px;
+         }*/
+        .element {
+            font-family: serif;
+            padding: 10px 20px;
+            background: #903779;
+            color: #fff;
+            display: inline-block;
+            margin: 5px;
+            cursor: move;
+        }
+        p {
+            display: inline-block;
+            width: 100%;
+            background: #f9f9f9;
+            padding: 5px;
+        }
+        .box {
+            margin: 0 5px;
+            padding: 3px;
+            border: 1px solid red;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .box.droppable {
+            display: inline-block;
+            min-width: 150px;
+            min-height: 2rem;
+            background: #ccc;
+            text-indent: 0px;
+        }
+        .box.droppable:empty {
+            background-color: #ccc;
+        }
+        .droppable.-active {
+            background: orange;
+        }
+        .droppable.-wrong {
+            background-color: #FF005A;
+        }
+        .droppable.-correct {
+            background-color: #266e18;
+        }
+        .droppable.-correct > span {
+            cursor: not-allowed;
+        }
+        p.-correct::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            margin-left: 10px;
+            background: url('./tick.png') center/cover;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        p::first-letter {
+            font: bold 1.2rem cursive;
+        }
+        @media only screen and (max-width: 624px) {
+            h1 {
+                font-size: 1.4rem;
+            }
+            .drag-and-drop {
+                flex-direction: column;
+            }
+            .draggable-container {
+                width: 100%;
+                flex-flow: row wrap;
+                justify-content: center;
+            }
+            .droppable-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <h1>3 ways to measure your adaptability — and how to improve it</h1>
+    <div class="drag-and-drop">
+        <div class="draggable-container"></div>
+        <div class="droppable-container"></div>
+    </div>
+</div>
+<script>
+    // const checkCorrectAnswerEntryPoint = '/english/How%20to%20manage%20your%20time%20more%20effectively/validate';
+    const draggableArea = droppableArea = document.querySelector('.drag-and-drop');
+    const draggableContainer = draggableArea.querySelector('.draggable-container');
+    const droppableContainer = droppableArea.querySelector('.droppable-container');
+    let initRequestsLimit = checkCorrectnessLimit = 3;
+
+    const shiftElement = (id) => {
+        let elem = document.querySelector(`[data-ident="${id}"]`);
+        return elem.parentNode.removeChild(elem);
+    };
+    //
+    // const checkIfCorrect = (e) => {
+    //   const wordsBlocks = draggableContainer.querySelector('.element');
+    //   wordsBlocks.forEach((el) => el.draggable = false);
+    //   checkCorrectnessLimit--;
+    //
+    //   const config = {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       sentenceId: e.parentNode.textContent.slice(0, 1),
+    //       word: e.target.textContent,
+    //     })
+    //   };
+    //   fetch(checkCorrectAnswerEntryPoint, config)
+    //   .then((rawResp) => rawResp.json())
+    //   .then((resp) => {
+    //     if (resp.status === 200) {
+    //       wordsBlocks.forEach((el) => el.draggable = true);
+    //       if (resp.isCorrect) {
+    //         e.target.classList.add('-correct');
+    //         e.target.parentNode.classList.add('-correct');
+    //         e.target.firstElementChild.draggable = false;
+    //       } else {
+    //         e.target.classList.add('-wrong');
+    //       }
+    //     } else {
+    //       throw '';
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.error('Error occurred during checking word correctness on server' + err.message);
+    //
+    //     while (checkCorrectnessLimit) checkIfCorrect();
+    //   })
+    // };
+
+    const checkIfCorrect = (e) => {
+        const wordsBlocks = draggableContainer.querySelectorAll('.element');
+        wordsBlocks.forEach((el) => el.draggable = false);
+        checkCorrectnessLimit--;
+
+        const config = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sentenceId: +e.target.parentNode.dataset.id,
+                word: e.target.textContent,
+            })
+        };
+
+        fetch('/english/validate', config)
+            .then((rawResp) => rawResp.json())
+            .then((resp) => {
+                if (resp.status === 200 || true) {
+                    wordsBlocks.forEach((el) => el.draggable = true);
+                    if (resp.success) {
+                        e.target.classList.add('-correct');
+                        e.target.parentNode.classList.add('-correct');
+                        e.target.firstElementChild.draggable = false;
+                    } else {
+                        e.target.classList.add('-wrong');
+                    }
+                } else {
+                    throw '';
+                }
+            })
+            .catch((err) => {
+                console.error('Error occurred during checking word correctness on server' + err.message);
+
+                // while (checkCorrectnessLimit) checkIfCorrect();
+            });
+    };
+
+    draggableArea.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', e.target.dataset.ident);
+        e.dataTransfer.effectAllowed = 'move';
+    });
+
+    droppableArea.addEventListener('dragover', (e) => {
+        if(e.dataTransfer.types[0] === 'text/plain') {
+            e.preventDefault();
+            if(e.target.classList.contains('droppable')) {
+                e.toElement.classList.add('-active');
+            }
+        }
+    });
+
+    droppableArea.addEventListener('dragenter', (e) => {
+        if(e.dataTransfer.types[0] === 'text/plain') {
+            e.preventDefault();
+            if(e.target.classList.contains('droppable')) {
+                e.toElement.classList.add('-active');
+            }
+        }
+    });
+
+    droppableArea.addEventListener('dragleave', (e) => {
+        if(e.target.classList.contains('droppable') && !e.target.children.length) {
+            e.target.classList.remove('-active', '-correct', '-wrong');
+        }
+    });
+
+    droppableArea.addEventListener('drop', (e) => {
+        let condition = e.target.classList.contains('draggable-container') || e.target.classList.contains('box');
+        if(!condition) return;
+        let id = e.dataTransfer.getData('text/plain');
+        e.target.appendChild(shiftElement(id));
+        checkIfCorrect(e);
+    });
+
+    // const randomizeArray = (arr) => {
+    //   let currentIndex = arr.length, tempValue, randomIndex;
+    //
+    //   while (currentIndex) {
+    //     randomIndex = Math.floor(Math.random() * currentIndex);
+    //     currentIndex--;
+    //     tempValue = array[currentIndex];
+    //       array[currentIndex] = array[randomIndex];
+    //       array[randomIndex] = tempValue;
+    //   }
+    //
+    //   return arr;
+    // };
+
+    const appendSentences = (resp) => {
+        const wordsArr = resp.words;
+        const sentencesArr = resp.sentences;
+        console.log(sentencesArr)
+        // const randomizedWords = randomizeArray(wordsArr);
+        let wordsStr = '';
+        let sentencesStr = '';
+
+        wordsArr.forEach((word, ind) => wordsStr += `<span class="element" draggable="true" data-ident=${ind}>${word}</span>`);
+        draggableContainer.innerHTML = wordsStr;
+
+        sentencesArr.forEach((sentence, ind) => sentencesStr += `<p data-id=${sentence.id}>${ind + 1}. ${sentence.sentence.replace(/[+]/g, '<span class="box droppable"></span>')}</p>`);
+        console.log(sentencesStr)
+        droppableContainer.innerHTML = sentencesStr;
+    };
+
+    const getSentence = (id) => {
+        initRequestsLimit--;
+
+        const url = `/english/article/${id}`;
+        fetch(url)
+            .then((rawResp) => rawResp.json())
+            .then((resp) => appendSentences(resp))
+            .catch((err) => {
+                console.error('Initial response from server failed\n' + err.message);
+                while (initRequestsLimit) getSentence(id);
+            });
+    };
+
+    const id = +location.href.slice(location.href.indexOf('?=id'));
+    getSentence(id);
+</script>
+</body>
+</html>
